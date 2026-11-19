@@ -1,21 +1,19 @@
-# The manifest. Floorbit reads it before it runs any code: what the plugin may touch (uses), its
-# settings, and what the agent part may send. Field by field: Floorbit's docs/plugins.md.
-id: example                    # rename: lowercase letters, digits, dashes; the repo is floorbit-plugin-<id>
-name: Example reachability
-icon: network
-version: "0.1.0"
+# Switch status and port traffic from Zabbix, for halls that already watch their switches there.
+# Off until turned on under Settings > Plugins. It only reads.
+id: zabbix
+name: Zabbix
+icon: eye
+version: "1.0.0"
 floorbit: ">=0.1,<2"
-description: "The local agent checks that a few services in the hall answer on their TCP port and the dashboard shows how many do."
+description: "Live switch status and port state, traffic and errors from Zabbix (hosts with the standard SNMP network interface items). Feeds the floor plan, the status monitor and the seat inspector. Zabbix keeps no ARP or MAC tables, so finding a seat's port by IP still needs LibreNMS, UniFi, MikroTik or a seat source."
 author: Floorbit
-homepage: https://github.com/bitsandbricks-ch/floorbit-plugin-template
-uses: [agent, settings, widgets, storage]
+homepage: https://www.zabbix.com
+uses: [settings, http, monitoring]
 settings:
-  - {key: targets, label: Services, type: text, placeholder: "dns = 192.0.2.53:53\ncache = 192.0.2.80:80",
-     help: "One per line: a name = address:port. The agent tries to open a TCP connection to each."}
-  - {key: interval, label: Seconds between checks, type: int, default: 30, min: 5, max: 600}
-widgets:
-  - {id: summary, label: Services up, size: small, refresh: 30}
-agent:
-  sends:
-    # aggregate: counts only. Floorbit and the agent both refuse a payload with an address in it.
-    status: {privacy: aggregate, latest: true}
+  - {key: url, label: Zabbix URL, type: url, placeholder: "https://zabbix.example.com",
+     help: "The Zabbix front end. Floorbit calls its api_jsonrpc.php (Zabbix 6.4 or newer)."}
+  - {key: token, label: API token, type: secret,
+     help: "Administration > Users > API tokens, for a user whose role can only read the switches' host group."}
+  - {key: group, label: Host group, type: string, default: Switches,
+     help: "Only hosts in this group are read."}
+  - {key: verify_ssl, label: Verify TLS certificates, type: bool, default: true}

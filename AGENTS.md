@@ -6,10 +6,9 @@ Humans: the same rules apply to you in spirit.
 
 ## What this is
 
-A plugin for [Floorbit](https://github.com/bitsandbricks-ch/floorbit), made from
-bitsandbricks-ch/floorbit-plugin-template and released to the Floorbit Marketplace (bitsandbricks-ch/floorbit-plugins). The plugin is the repository's root:
-`plugin.yaml`, `plugin.py` (the hosted part) and `agent.py` (the part on the local agent in the
-hall). The [README](README.md) says how it is tested and released.
+The Zabbix plugin for [Floorbit](https://github.com/bitsandbricks-ch/floorbit) (id `zabbix`), released
+to the Floorbit Marketplace (bitsandbricks-ch/floorbit-plugins). The plugin is the repository's root:
+`plugin.yaml` and `plugin.py`, which Floorbit runs on the local agent in the hall. The [README](README.md) says how it is tested and released.
 
 ## Workflow
 
