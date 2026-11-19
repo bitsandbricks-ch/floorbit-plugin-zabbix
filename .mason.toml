@@ -1,0 +1,12 @@
+# Mason (the `mason` command and the web app) reads this file for bump, release and New tag.
+# The org's defaults (bitsandbricks-ch/.mason) say what every repo should look like; this file
+# has the last word for this repo. Review changes to it like code.
+#
+#   mason bump <repo> minor     PR that sets the version in plugin.yaml and adds a CHANGELOG section
+#   mason release tag <repo>    pushes v<version>; release.yml signs it and makes the release
+#
+# Releases are immutable and made by the workflow, so push only the tag.
+[release]
+version = "plugin.yaml"
+changelog = ["CHANGELOG.md"]
+tag = "v{version}"

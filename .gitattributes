@@ -1,0 +1,9 @@
+# The release signs `git archive HEAD`: files marked export-ignore stay out of the signed plugin.
+# (Floorbit's signer also drops .github/, tests/ and FLOORBIT_REF.)
+.gitattributes export-ignore
+.gitignore export-ignore
+.editorconfig export-ignore
+.mason.toml export-ignore
+AGENTS.md export-ignore
+CLAUDE.md export-ignore
+SECURITY.md export-ignore
