@@ -59,6 +59,9 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/floorbit
         run: python -m pytest -q tests
+      - name: Changelog fragments
+        working-directory: plugin
+        run: python3 scripts/changelog.py check
       - id: meta
         name: Id and version
         env:
@@ -132,7 +135,8 @@ jobs:
           VER: ${{ needs.test.outputs.version }}
         run: |
           # The notes are the version's section of CHANGELOG.md.
-          awk -v v="## $VER" '$0 == v {on=1; next} /^## / && on {exit} on' CHANGELOG.md > notes.md
+          # `mason bump` writes "## [1.2.0] - <date>"; older sections are "## 1.2.0".
+          awk -v v="$VER" '$0 == "## " v || index($0, "## [" v "]") == 1 {on=1; next} /^## / && on {exit} on' CHANGELOG.md > notes.md
           gh release create "$TAG" dist/*.tar.gz --repo "$GITHUB_REPOSITORY" --title "$VER" --notes-file notes.md
       - name: Tell the Marketplace
         env:

@@ -4,6 +4,10 @@ These rules are for AI coding agents (Claude Code, Codex, Copilot, ...) working 
 Humans: the same rules apply to you in spirit.
 `CLAUDE.md` imports this file.
 
+This repo follows the [BitsAndBricks handbook](https://github.com/bitsandbricks-ch/handbook),
+profile **plugin** (see `.mason.toml`). Read its core chapters and the blocks that profile lists.
+Where this file differs from the handbook, this file wins for this repo.
+
 ## What this is
 
 The Zabbix plugin for [Floorbit](https://github.com/bitsandbricks-ch/floorbit) (id `zabbix`), released
@@ -35,8 +39,10 @@ to the Floorbit Marketplace (bitsandbricks-ch/floorbit-plugins). The plugin is t
 - **No secrets** in code, commits, screenshots, logs or docs. Use example values (`example.com`,
   `192.0.2.x`).
 - **Names:** the brand is written "BitsAndBricks". Public text names the author as "Mike" only.
-- **Releases:** a version goes into `plugin.yaml` and gets a `## <version>` section in
-  `CHANGELOG.md`; the maintainer pushes the `v<version>` tag, and the workflow signs and releases it.
+- **Releases:** describe your change in a new `changelog.d/<topic>.md` fragment, not in
+  `CHANGELOG.md` (see `changelog.d/README.md`). Don't change the version in `plugin.yaml`:
+  `mason bump` does that, and the maintainer pushes the `v<version>` tag; the workflow signs and
+  releases it.
 - **Workflows:** pin every action to a full commit sha with the version as a comment
   (`uses: actions/checkout@<sha> # v7.0.1`), keep `permissions` minimal, and never put
   `${{ github.event.* }}` text straight into a `run:` script (pass it through `env:`).

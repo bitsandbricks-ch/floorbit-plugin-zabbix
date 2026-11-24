@@ -7,3 +7,5 @@
 AGENTS.md export-ignore
 CLAUDE.md export-ignore
 SECURITY.md export-ignore
+scripts export-ignore
+changelog.d export-ignore

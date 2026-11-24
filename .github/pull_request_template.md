@@ -10,4 +10,5 @@
 
 - [ ] The checks pass
 - [ ] Docs and README updated for user-facing or setup changes
+- [ ] A `changelog.d/` fragment describes the change (if users notice it)
 - [ ] No secrets, tokens or personal data in code, screenshots or logs
