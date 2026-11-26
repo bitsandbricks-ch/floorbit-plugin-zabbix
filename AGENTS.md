@@ -4,6 +4,10 @@ These rules are for AI coding agents (Claude Code, Codex, Copilot, ...) working 
 Humans: the same rules apply to you in spirit.
 `CLAUDE.md` imports this file.
 
+This repo follows the [BitsAndBricks handbook](https://github.com/bitsandbricks-ch/handbook),
+profile **plugin** (see `.mason.toml`). Read its core chapters and the blocks that profile lists.
+Where this file differs from the handbook, this file wins for this repo.
+
 ## What this is
 
 The Zabbix plugin for [Floorbit](https://github.com/bitsandbricks-ch/floorbit) (id `zabbix`), released
@@ -24,8 +28,11 @@ to the Floorbit Marketplace (bitsandbricks-ch/floorbit-plugins). The plugin is t
 5. **Done** means the task is complete, the checklist is ticked and the checks are green: then mark
    the pull request ready for review. Leave it a draft only while work is open or you are blocked,
    and say why in the description.
-6. **Never merge** your own pull request, never force-push to a branch someone else works on, and
-   never push a tag. Merging and releasing are the maintainer's call.
+6. **Auto-merge** (handbook decision 0017): once the pull request is ready, turn on squash auto-merge
+   (`gh pr merge <n> --auto --squash`); GitHub merges it when the required check passes. Leave it off,
+   for the maintainer to merge, on pull requests that touch keys, signing, sign-in, the plugin sandbox or
+   release workflows, and on version pull requests from `mason bump`. Never merge by hand, never
+   force-push to a branch someone else works on, never push a tag. Releasing is the maintainer's call.
 7. Keep the pull request description current when you push more commits.
 
 ## Rules
@@ -35,8 +42,10 @@ to the Floorbit Marketplace (bitsandbricks-ch/floorbit-plugins). The plugin is t
 - **No secrets** in code, commits, screenshots, logs or docs. Use example values (`example.com`,
   `192.0.2.x`).
 - **Names:** the brand is written "BitsAndBricks". Public text names the author as "Mike" only.
-- **Releases:** a version goes into `plugin.yaml` and gets a `## <version>` section in
-  `CHANGELOG.md`; the maintainer pushes the `v<version>` tag, and the workflow signs and releases it.
+- **Releases:** describe your change in a new `changelog.d/<topic>.md` fragment, not in
+  `CHANGELOG.md` (see `changelog.d/README.md`). Don't change the version in `plugin.yaml`:
+  `mason bump` does that, and the maintainer pushes the `v<version>` tag; the workflow signs and
+  releases it.
 - **Workflows:** pin every action to a full commit sha with the version as a comment
   (`uses: actions/checkout@<sha> # v7.0.1`), keep `permissions` minimal, and never put
   `${{ github.event.* }}` text straight into a `run:` script (pass it through `env:`).

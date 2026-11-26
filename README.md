@@ -26,7 +26,8 @@ PYTHONPATH=../floorbit python -m pytest -q tests
 
 ## Releasing
 
-Put the new version into `plugin.yaml`, add a `## <version>` section to `CHANGELOG.md`, merge, then
+Run `python scripts/changelog.py collect`, then `mason bump` (it sets the version in `plugin.yaml` and
+turns `[Unreleased]` in `CHANGELOG.md` into its section), merge, then
 push the tag (or `mason release tag floorbit-plugin-zabbix`):
 
 ```

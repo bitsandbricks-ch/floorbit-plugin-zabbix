@@ -6,6 +6,10 @@
 #   mason release tag <repo>    pushes v<version>; release.yml signs it and makes the release
 #
 # Releases are immutable and made by the workflow, so push only the tag.
+[handbook]
+profile = "plugin"
+version = "v1"
+
 [release]
 version = "plugin.yaml"
 changelog = ["CHANGELOG.md"]
